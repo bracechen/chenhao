@@ -1,0 +1,16 @@
+import java.util.Scanner;
+public class zhuanghuan{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        System.out.println("-----猜拳游戏-----");
+        System.out.println("请出拳（1.剪刀 2.石头 3.布）");
+        int person=in.nextInt();
+        int computer=(int)(Math.random()*3)+1;
+        System.out.println(computer);
+        if(person==computer){
+            System.out.println("平局");
+        }else if(person==1&&computer==2||person==2&&computer==3||person==3&&computer==1)
+        {  System.out.println("你输了");}
+           else  {  System.out.println("你赢了");}
+    }
+}
