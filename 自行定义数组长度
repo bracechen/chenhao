@@ -11,6 +11,6 @@ public class zhuanghuan1 {
             arr[i]=in.nextInt();
             sum+=arr[i];
         }
-        System.out.println("5个学生的平均分为"+sum/5);
+        System.out.println(arr.length+"个学生的平均分为"+sum/arr.length);
     }
 }
