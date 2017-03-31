@@ -1,0 +1,25 @@
+class Dog{
+    String name;
+    public String print(String n){
+        System.out.println(n);
+        return n;
+    }
+    public void str(int a){
+        if(a==0){
+            System.out.println("你好");
+        }else if(a==1){
+            return;
+        }
+
+        System.out.println("我很好");
+    }
+}
+public class zhuanhuan{
+    public static void main(String[] args){
+        Dog A=new Dog();
+        //String name=A.print("小明");
+        //System.out.println(name);
+        A.str(1
+        );
+    }
+}
