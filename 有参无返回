@@ -1,0 +1,24 @@
+public class zhuanhuan{
+    public static void main(String[] args){
+        zhuanhuan1 per=new zhuanhuan1();
+
+        per.sleep("床上");
+    }
+}
+
+
+public class zhuanhuan1{
+    String name;
+    int age;
+    char Gender;
+
+    public void eat(){
+        System.out.println("我在吃饭");
+    }
+
+
+    public void sleep(String A){
+        System.out.println("我在"+A+"睡觉");
+    }
+
+}
