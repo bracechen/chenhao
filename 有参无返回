@@ -1,23 +1,13 @@
 public class zhuanhuan{
     public static void main(String[] args){
-        zhuanhuan1 per=new zhuanhuan1();
+        Test pe=new Test();
 
-        per.sleep("床上");
+        pe.slee("床上");
     }
 }
 
-
-public class zhuanhuan1{
-    String name;
-    int age;
-    char Gender;
-
-    public void eat(){
-        System.out.println("我在吃饭");
-    }
-
-
-    public void sleep(String A){
+public class Test{
+    public void slee(String A){
         System.out.println("我在"+A+"睡觉");
     }
 
