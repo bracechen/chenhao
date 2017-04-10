@@ -1,0 +1,25 @@
+import java.util.Scanner;
+class Dog{
+    String name;
+    public String print(String n){
+        System.out.println(n);
+        return n;
+    }
+    public void str(int a){
+        if(a==0){
+            System.out.println("你好");
+        }else if(a==1){
+            return;
+        }
+
+        System.out.println("我很好");
+    }
+}
+
+public class class1{
+    public static void main(String[] args){
+        Dog A=new Dog();
+        Scanner in=new Scanner(System.in);
+        A.str(in.nextInt());//类里如何使用Scanner赋值
+    }
+}
