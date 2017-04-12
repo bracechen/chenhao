@@ -1,0 +1,205 @@
+public class Person {
+    private int on;
+    private String name;
+    private int age;
+    private int java;
+    private int c_shar;
+    private int html;
+    private int sql;
+    private int sum;
+    private int avg;
+
+    public void setOn(int on) {
+        this.on = on;
+    }
+
+    public int getOn() {
+        return this.on;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getJava() {
+        return java;
+    }
+
+    public void setJava(int java) {
+        this.java = java;
+    }
+
+    public int getC_shar() {
+        return c_shar;
+    }
+
+    public void setC_shar(int c_shar) {
+        this.c_shar = c_shar;
+    }
+
+    public int getHtml() {
+        return html;
+    }
+
+    public void setHtml(int html) {
+        this.html = html;
+    }
+
+    public int getSql() {
+        return sql;
+    }
+
+    public void setSql(int sql) {
+        this.sql = sql;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum() {
+        this.sum = java+sql+html+c_shar;
+    }
+
+    public int getAvg() {
+        return avg;
+    }
+
+    public void setAvg() {
+        this.avg = this.sum/4;
+    }
+    public String toString(){
+        String msg="\t"+this.on+"\t"+this.name+"\t"+this.age+"\t"+this.java+"\t"
+                +this.c_shar+"\t"+this.html+"\t"+this.sql+"\t"+this.sum+"\t"+this.avg;
+        return msg;
+    }
+}
+
+
+import java.util.*;
+
+public class class2 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("--请定义人数--");
+        Person[] stuArr = new Person[in.nextInt()];
+        class1 class1Stu = new class1();
+        while (true) {
+            System.out.println("--选择你要执行的功能：--");
+            System.out.println("10:添加一个学生");
+            System.out.println("11:查找一个学生");
+            System.out.println("12:根据编号更新学生的基本信息");
+            System.out.println("13:根据编号删除学生--");
+            System.out.println("14:根据编号输入学生的各门成绩");
+            System.out.println("15:根据某门成绩进行排序");
+            System.out.println("16:根据总分进行排序");
+            System.out.println("99:退出系统");
+
+            int number = in.nextInt();
+            if (number == 10) {
+                System.out.println("请输入学生的姓名：");
+                String name = in.next();
+                System.out.println("请输入学生的年龄：");
+                int age = in.nextInt();
+
+                class1Stu.create(name, age, stuArr);//添加学生。
+                class1Stu.print(stuArr);
+            } else if (number == 11) {
+                System.out.println("执行查找学生的基本信息操作");
+                System.out.println("请输入学生的编号进行查找：");
+                int on = in.nextInt();
+                class1Stu.select(on, stuArr);
+            }else if(number==12){
+                System.out.println("执行更新学员的基本信息");
+                System.out.println("请输入学生的编号:");
+                int on=in.nextInt();
+                System.out.println("请输入学生的姓名：");
+                String name=in.next();
+                System.out.println("请输入学生的年龄:");
+                int age=in.nextInt();
+                class1Stu.update(on,name,age,stuArr);
+                class1Stu.print(stuArr);
+            }
+
+            }
+        }
+    }
+    
+    import java.util.*;
+public class class1 {//用来管理学生的一个类
+    String msg="\t编号\t姓名\t年龄\tjava\tC#\tHtml\tSql\t总分\t平局分";
+    public void print(Person[] arr){//用来刷新数据的
+        System.out.println(msg);
+        for(int i=0;i<arr.length;i++){
+            System.out.println(arr[i]);
+            }
+        }
+        public boolean exist(int on,Person stu){//判断学生是否存在
+        if(stu!=null){//先看数组是否为空
+            if(stu.getOn()==on){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
+        }
+
+    public void create(String name, int age, Person[] arr) {
+        Person stu = new Person();
+        stu.setName(name);
+        stu.setAge(age);
+        int i = this.setIndex(arr);
+        stu.setOn(i+1);
+        if (i == 99999) {
+            System.out.println("学生人数已到最大，不能再添加了");
+        } else {
+            arr[i] = stu;
+        }
+
+    }
+
+    public int setIndex(Person[] arr) {//返回数组为空的下标
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == null) {
+                return i;
+            }
+        }
+        return 99999;
+    }
+    public void select(int on,Person[] arr){//查询方法
+        System.out.print(msg);
+        for(int i=0;i<arr.length;i++){
+           if(this.exist(on,arr[i])==true){//这个==true可以不写，默认为真才可以成立
+               System.out.println(msg);
+               System.out.println(arr[i]);
+               return;
+           }
+        }
+         System.out.println("--没有这个学生的存在--");
+    }
+     public void update(int on,String name,int age,Person[] arr){//更新学员信息
+         for(int i=0;i<arr.length;i++){
+             if(this.exist(on,arr[i])){
+                arr[i].setName(name);
+                arr[i].setAge(age);
+                System.out.println("---更新学生信息成功---");
+                return;
+             }
+         }
+        System.out.println("没有这个学生更新信息没有成功");
+
+     }
+}
