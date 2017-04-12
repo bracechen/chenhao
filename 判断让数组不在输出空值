@@ -1,0 +1,6 @@
+ for(int i=0;i<stuArr.length;i++){
+            if(stuArr[i]!=null){
+            System.out.println(stuArr[i]);
+            }
+    }
+}}
