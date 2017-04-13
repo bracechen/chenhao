@@ -1,0 +1,332 @@
+public class Person {
+    private int on;
+    private String name;
+    private int age;
+    private int java;
+    private int c_shar;
+    private int html;
+    private int sql;
+    private int sum;
+    private int avg;
+
+    public void setOn(int on) {
+        this.on = on;
+    }
+
+    public int getOn() {
+        return this.on;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getJava() {
+        return java;
+    }
+
+    public void setJava(int java) {
+        this.java = java;
+    }
+
+    public int getC_shar() {
+        return c_shar;
+    }
+
+    public void setC_shar(int c_shar) {
+        this.c_shar = c_shar;
+    }
+
+    public int getHtml() {
+        return html;
+    }
+
+    public void setHtml(int html) {
+        this.html = html;
+    }
+
+    public int getSql() {
+        return sql;
+    }
+
+    public void setSql(int sql) {
+        this.sql = sql;
+    }
+
+    public int getSum() {
+        return sum;
+    }
+
+    public void setSum() {
+        this.sum = java + sql + html + c_shar;
+    }
+
+    public int getAvg() {
+        return avg;
+    }
+
+    public void setAvg() {
+        this.avg = this.sum / 4;
+    }
+
+    public String toString() {
+        String msg = "\t" + this.on + "\t" + this.name + "\t" + this.age + "\t" + this.java + "\t"
+                + this.c_shar + "\t" + this.html + "\t" + this.sql + "\t" + this.sum + "\t" + this.avg;
+        return msg;
+    }
+}
+
+
+
+import java.util.*;
+
+public class class2 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.println("--请定义人数--");
+        Person[] stuArr = new Person[in.nextInt()];
+        class1 class1Stu = new class1();
+        while (true) {//循环
+            System.out.println("--选择你要执行的功能：--");
+            System.out.println("10:添加一个学生");
+            System.out.println("11:查找一个学生");
+            System.out.println("12:根据编号更新学生的基本信息");
+            System.out.println("13:根据编号删除学生--");
+            System.out.println("14:根据编号输入学生的各门成绩");
+            System.out.println("15:根据某门成绩进行排序");
+            System.out.println("16:根据总分进行排序");
+            System.out.println("99:退出系统");
+
+            int number = in.nextInt();
+            if (number == 10) {
+                System.out.println("请输入学生的姓名：");
+                String name = in.next();
+                System.out.println("请输入学生的年龄：");
+                int age = in.nextInt();
+
+                class1Stu.create(name, age, stuArr);//添加学生。
+
+            } else if (number == 11) {
+                System.out.println("执行查找学生的基本信息操作");
+                System.out.println("请输入学生的编号进行查找：");
+                int on = in.nextInt();
+                class1Stu.select(on, stuArr);
+            }else if(number==12){
+                System.out.println("执行更新学员的基本信息");
+                System.out.println("请输入学生的编号:");
+                int on=in.nextInt();
+                System.out.println("请输入学生的姓名：");
+                String name=in.next();
+                System.out.println("请输入学生的年龄:");
+                int age=in.nextInt();
+                class1Stu.update(on,name,age,stuArr);
+
+            }else if(number==13){
+                System.out.println("执行删除操作");
+                System.out.println("请输入学生的编号:");
+                int on=in.nextInt();
+                class1Stu.delete(on,stuArr);
+
+            }else if(number==14){
+            System.out.println("执行输入成绩操作");
+            System.out.println("请输入学生的编号:");
+            int on=in.nextInt();
+            class1Stu.input(on,stuArr);
+            }else if(number==15){
+                System.out.println("执行根据某科成绩排序操作");
+                System.out.println("请确定课程:1.java 2.C# 3.Html 4.sql");
+                int num=in.nextInt();
+                class1Stu.courseSort(num, stuArr);
+
+            }else if(number==16){
+                System.out.println("执行根据总分成绩排序操作");
+                class1Stu.sumSort(stuArr);
+            }
+        }
+    }}
+    
+    
+    
+    import java.util.*;
+public class Admin {//用来管理学生的一个类
+	String msg="\t编号\t姓名\t年龄\tjava\tC#\tHtml\tSql\t总分\t平局分";
+	public void print(Student[] arr){//用来刷新数据的
+		System.out.println(msg);
+		for(int i=0;i<arr.length;i++){
+			if(arr[i]!=null){
+				arr[i].setSum();
+				arr[i].setAvg();
+				System.out.println(arr[i]);
+			}
+		}
+	}
+	public boolean exist(int on,Student stu){//判断学生是否存在
+		if(stu!=null){
+			if(stu.getOn()==on){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		return false;
+	}
+	public void create(String name,int age,Student[] arr){//添加学生的方法
+		Student stu=new Student();
+		stu.setName(name);
+		stu.setAge(age);
+		int i=this.setIndex(arr);
+		stu.setOn(i);
+		if(i==99999){
+			System.out.println("学生人数以到最大，不能再添加了");
+		}else{
+			arr[i]=stu;
+		}
+		this.print(arr);
+	}
+	public int setIndex(Student[] arr){//返回数组里面为空的下标
+		for(int i=0;i<arr.length;i++){
+			if(arr[i]==null){
+				return i;
+			}
+		}
+		return 99999;
+	}
+	public void select(int on,Student[] arr){//查询方法
+		System.out.println(msg);
+		for(int i=0;i<arr.length;i++){
+			if(this.exist(on,arr[i])){
+				System.out.println(msg);
+				System.out.println(arr[i]);
+				return;
+			}
+		}
+		System.out.println("--没有这个学生的存在--");
+	}
+	public void update(int on,String name,int age,Student[] arr){//更新学员信息
+		for(int i=0;i<arr.length;i++){
+			if(this.exist(on,arr[i])){
+				arr[i].setName(name);
+				arr[i].setAge(age);
+				System.out.println("---更新学生信息成功--");
+				this.print(arr);
+				return;
+			}
+		}
+		System.out.println("没找到这个学生更新信息失败");
+	}
+	public void delete(int on,Student[] arr){
+		for(int i=0;i<arr.length;i++){
+			if(this.exist(on,arr[i])){
+				arr[i]=null;
+				this.print(arr);
+				return;
+			}
+		}
+		System.out.println("您所指定编号的学生没有存在");
+	}
+	public void input(int on,Student[] arr){//输入学生成绩的操作
+		for(int i=0;i<arr.length;i++){
+			if(this.exist(on, arr[i])){
+				System.out.println("请输入"+arr[i].getName()+"java的成绩");
+				Scanner in=new Scanner(System.in);
+				if(in.hasNextInt()){
+					arr[i].setJava(in.nextInt());
+				}
+				System.out.println("请输入"+arr[i].getName()+"C#的成绩");
+				if(in.hasNextInt()){
+					arr[i].setC_shar(in.nextInt());
+				}
+				System.out.println("请输入"+arr[i].getName()+"Html的成绩");
+				if(in.hasNextInt()){
+					arr[i].setHtml(in.nextInt());
+				}
+				System.out.println("请输入"+arr[i].getName()+"Sql的成绩");
+				if(in.hasNextInt()){
+					arr[i].setSql(in.nextInt());
+				}
+				this.print(arr);
+				break;
+			}
+		}
+	}
+	public void courseSort(int num,Student[] arr){//根据指定的科目进行排序操作
+		if(num==1){
+			for(int i=0;i<arr.length-1;i++){
+				for(int j=i+1;j<arr.length;j++){
+					if(arr[i]!=null&&arr[j]!=null){
+						if(arr[i].getJava()<arr[j].getJava()){
+							Student t=arr[i];
+							arr[i]=arr[j];
+							arr[j]=t;
+						}
+					}
+				}
+			}
+		}else if(num==2){
+			for(int i=0;i<arr.length-1;i++){
+				for(int j=i+1;j<arr.length;j++){
+					if(arr[i]!=null&&arr[j]!=null){
+						if(arr[i].getC_shar()<arr[j].getC_shar()){
+							Student t=arr[i];
+							arr[i]=arr[j];
+							arr[j]=t;
+						}
+					}
+				}
+			}
+		}else if(num==3){
+			for(int i=0;i<arr.length-1;i++){
+				for(int j=i+1;j<arr.length;j++){
+					if(arr[i]!=null&&arr[j]!=null){
+						if(arr[i].getHtml()<arr[j].getHtml()){
+							Student t=arr[i];
+							arr[i]=arr[j];
+							arr[j]=t;
+						}
+					}
+				}
+			}
+		}else if(num==4){
+			for(int i=0;i<arr.length-1;i++){
+				for(int j=i+1;j<arr.length;j++){
+					if(arr[i]!=null&&arr[j]!=null){
+						if(arr[i].getSql()<arr[j].getSql()){
+							Student t=arr[i];
+							arr[i]=arr[j];
+							arr[j]=t;
+						}
+					}
+				}
+			}
+		}
+		this.print(arr);
+	}
+	public void sumSort(Student[] arr){//根据总分进行排序
+		for(int i=0;i<arr.length-1;i++){
+			for(int j=i+1;j<arr.length;j++){
+				if(arr[i]!=null&&arr[j]!=null){
+					if(arr[i].getSum()<arr[j].getSum()){
+						Student t=arr[i];
+						arr[i]=arr[j];
+						arr[j]=t;
+					}
+				}
+			}
+		}
+		this.print(arr);
+	}
+}
+
+    
