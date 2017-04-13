@@ -1,0 +1,28 @@
+public void courseSort(int num,Person[] arr){
+        if(num==1){
+            for(int i=0;i<arr.length-1;i++){
+                for(int j=i+1;j<arr.length;j++){
+                    if (arr[i]!=null) {//空数组运行报错。
+
+                    if(arr[i].getJava()<arr[j].getJava()){
+                        Person t=arr[i];
+                        arr[i]=arr[j];
+                        arr[j]=t;
+                    }
+                    }
+                }
+            }
+        }
+     }
+}
+
+else if(number==14){
+            System.out.println("执行输入成绩操作");
+            System.out.println("请输入学生的编号:");
+            int on=in.nextInt();
+            class1Stu.input(on,stuArr);
+            }else if(number==15){
+                System.out.println("执行根据某科成绩排序操作");
+                System.out.println("请确定课程:1.java 2.C# 3.Html 4.sql");
+                int num=in.nextInt();
+                class1Stu.courseSort(num, stuArr);
